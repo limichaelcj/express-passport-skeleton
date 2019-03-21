@@ -8,7 +8,7 @@ const saltRounds = 10;
 // custom middleware
 function ensureAuthenticated(req,res,next){
   if (req.isAuthenticated()) return next();
-  console.log('Not logged in. Redirect to root (/).');
+  console.log('Not logged in. Redirect to index.');
   res.redirect('/?notice=requireLogin');
 }
 
