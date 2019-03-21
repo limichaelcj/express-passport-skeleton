@@ -1,0 +1,11 @@
+if route
+  h1= route
+  hr
+if user
+  pre User: #{user}
+  span 
+    a(href="/logout") Logout
+  hr
+if notice
+  i(style="background-color:#e0e0e0;margin:10px 0;padding:0.5rem 1rem;")= notice
+  hr
