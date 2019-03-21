@@ -32,7 +32,7 @@ router.post('/login', passport.authenticate('local', {
 // 1- check existing user, create user
 // 2--- passport auth
 // 3----- redirect to profile on success
-router.post('/register', (req,res,next) => { //middleware 1
+router.post('/register', /*1*/ (req,res,next) => { 
   User.findOne({ username: req.body.username }, (err, user) => {
     var notice = err ? "registrationFail" : "registrationSuccess"
     if (err) next(err);
@@ -51,9 +51,9 @@ router.post('/register', (req,res,next) => { //middleware 1
       });
     }
   });
-}, passport.authenticate('local', { // middleware 2
+}, /*2*/ passport.authenticate('local', { // middleware 2
   failureRedirect: '/'
-}), (req,res,next) => { // middleware 3
+}), /*3*/ (req,res,next) => { // middleware 3
   res.redirect('/profile');
 });
 
