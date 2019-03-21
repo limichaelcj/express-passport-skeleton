@@ -19,6 +19,7 @@ const logger = require('morgan');
 // local dependencies
 const serverNotice = require('./server/middlewares/serverNotice');
 const indexRouter = require('./server/routes/index');
+const oauthRouter = require('./server/routes/oauth');
 
 // new express app
 const app = express();
@@ -51,7 +52,7 @@ app.use(serverNotice);
 
 // main routes
 app.use('/', indexRouter);
-
+app.use('/oauth', oauthRouter);
 // // basic 404 handler
 // app.use((req,res,next)=>{
 //   res.status(404).type('text').send('Not Found');
@@ -78,7 +79,10 @@ app.use(function(err, req, res, next) {
 });
 
 // database connection -- only allow requests when connection success
-mongoose.connect(process.env.DATABASE, { useNewUrlParser: true});
+mongoose.connect(process.env.DATABASE, {
+  useNewUrlParser: true,
+  useFindAndModify: false
+});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', startServer);

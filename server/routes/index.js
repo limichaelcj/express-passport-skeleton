@@ -32,7 +32,7 @@ router.post('/login', passport.authenticate('local', {
 // 1- check existing user, create user
 // 2--- passport auth
 // 3----- redirect to profile on success
-router.post('/register', /*1*/ (req,res,next) => { 
+router.post('/register', /*1*/ (req,res,next) => {
   User.findOne({ username: req.body.username }, (err, user) => {
     var notice = err ? "registrationFail" : "registrationSuccess"
     if (err) next(err);
