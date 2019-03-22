@@ -13,7 +13,7 @@ module.exports = async function(app, db){
         if (err) return done(err);
         if (!user) return done(null, false);
         // if no password, user account is linked to social
-        if (!user.password) return done(null, false);
+        if (user.provider) return done(null, false);
         // if (password != user.password) return done(null, false);
         // check password
         if (!bcrypt.compareSync(password, user.password)) {
